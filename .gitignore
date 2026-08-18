@@ -1,0 +1,17 @@
+# Entorno virtual
+venv/
+
+# Variables de entorno
+.env
+atlas-credentials.env
+claveatlas.txt
+
+# Archivos temporales de Python
+__pycache__/
+*.pyc
+
+# Archivos de Django
+db.sqlite3
+
+# Configuración local de VS Code
+.vscode/
