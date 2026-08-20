@@ -6,3 +6,6 @@ class Pedido(BaseModel):
     producto_id: str
     cantidad: int
     total: float
+
+class PedidooRespuesta(Pedido):
+    id: str
