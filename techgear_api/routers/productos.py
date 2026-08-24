@@ -6,10 +6,10 @@ from fastapi import APIRouter, HTTPException
 from bson import ObjectId
 
 # Modelos de Pydantic
-from models.producto import Producto, ProductoRespuesta
+from techgear_api.models.producto import Producto, ProductoRespuesta
 
 # Colección de productos en MongoDB
-from database import productos_collection
+from techgear_api.database import productos_collection
 
 
 # Creamos el router

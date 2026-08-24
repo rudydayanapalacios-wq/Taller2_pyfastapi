@@ -5,8 +5,8 @@
 from fastapi import APIRouter, HTTPException
 from bson import ObjectId
 
-from models.pedido import Pedido
-from database import pedidos_collection, productos_collection
+from techgear_api.models.pedido import Pedido
+from techgear_api.database import pedidos_collection, productos_collection
 
 
 # Creamos el router para los endpoints de pedidos

@@ -1,0 +1,112 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TechGear | Productos</title>
+
+    <link rel="stylesheet" href="{% static 'catalogo/css/productos.css' %}">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <a href="{% url 'inicio' %}" class="logo">
+            <span>TECH</span>GEAR
+        </a>
+
+        <a href="{% url 'inicio' %}" class="inicio-link">
+            Inicio
+        </a>
+
+    </header>
+
+
+    <main class="catalogo">
+
+        <section class="encabezado">
+            <span class="etiqueta">TECHGEAR / CATÁLOGO</span>
+
+            <h1>Productos</h1>
+
+            <p>
+                Explora los productos disponibles en nuestro catálogo.
+            </p>
+        </section>
+
+
+        {% if productos %}
+
+            <section class="productos">
+
+                {% for producto in productos %}
+
+                    <article class="producto">
+
+                        <div class="producto-numero">
+                            PRODUCTO {{ forloop.counter|stringformat:"02d" }}
+                        </div>
+
+                        <div class="producto-contenido">
+
+                            <h2>{{ producto.nombre }}</h2>
+
+                            <p class="descripcion">
+                                {{ producto.descripcion }}
+                            </p>
+
+                            <div class="datos">
+
+                                <div>
+                                    <span>PRECIO</span>
+                                    <strong>${{ producto.precio }}</strong>
+                                </div>
+
+                                <div>
+                                    <span>STOCK</span>
+                                    <strong>{{ producto.stock }}</strong>
+                                </div>
+
+                            </div>
+
+                            <span class="categoria">
+                                {{ producto.categoria }}
+                            </span>
+
+                        </div>
+
+                    </article>
+
+                {% endfor %}
+
+            </section>
+
+        {% else %}
+
+            <section class="sin-productos">
+
+                <div class="icono-vacio">!</div>
+
+                <h2>No hay productos disponibles</h2>
+
+                <p>
+                    No encontramos productos disponibles
+                    en este momento.
+                </p>
+
+                <a href="{% url 'inicio' %}">
+                    Volver al inicio
+                </a>
+
+            </section>
+
+        {% endif %}
+
+    </main>
+
+</body>
+</html>

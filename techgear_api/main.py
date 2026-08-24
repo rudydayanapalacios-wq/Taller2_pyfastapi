@@ -1,8 +1,6 @@
 from fastapi import FastAPI
-
-from routers.productos import router as productos_router
-from routers.pedidos import router as pedidos_router
-
+from techgear_api.routers.productos import router as productos_router
+from techgear_api.routers.pedidos import router as pedidos_router
 
 app = FastAPI(
     title="TechGear API"

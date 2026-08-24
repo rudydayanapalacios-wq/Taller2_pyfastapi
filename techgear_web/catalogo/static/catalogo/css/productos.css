@@ -1,0 +1,323 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+
+/* NAVBAR */
+
+.navbar {
+    height: 75px;
+    padding: 0 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.logo {
+    text-decoration: none;
+    color: #0f172a;
+
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.logo span {
+    color: #2563eb;
+}
+
+.inicio-link {
+    text-decoration: none;
+    color: #475569;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    padding: 9px 18px;
+
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+
+    transition: 0.2s ease;
+}
+
+.inicio-link:hover {
+    background: #0f172a;
+    color: #ffffff;
+}
+
+
+/* CONTENEDOR */
+
+.catalogo {
+    max-width: 1200px;
+    margin: auto;
+    padding: 70px 40px;
+}
+
+
+/* ENCABEZADO */
+
+.encabezado {
+    margin-bottom: 50px;
+}
+
+.etiqueta {
+    color: #2563eb;
+
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.encabezado h1 {
+    margin-top: 14px;
+    margin-bottom: 12px;
+
+    font-size: clamp(42px, 6vw, 64px);
+    letter-spacing: -2px;
+}
+
+.encabezado p {
+    color: #64748b;
+    font-size: 17px;
+}
+
+
+/* GRID */
+
+.productos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+
+/* TARJETA */
+
+.producto {
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+
+    padding: 25px;
+
+    min-height: 320px;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.producto:hover {
+    transform: translateY(-7px);
+
+    border-color: #93c5fd;
+
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.10);
+}
+
+
+/* NUMERO */
+
+.producto-numero {
+    color: #94a3b8;
+
+    font-size: 10px;
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 50px;
+}
+
+
+/* NOMBRE */
+
+.producto h2 {
+    color: #0f172a;
+
+    font-size: 24px;
+
+    margin-bottom: 12px;
+}
+
+
+/* DESCRIPCIÓN */
+
+.descripcion {
+    color: #64748b;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    min-height: 45px;
+}
+
+
+/* INFORMACIÓN */
+
+.datos {
+    display: flex;
+    gap: 45px;
+
+    margin-top: 28px;
+    padding-top: 18px;
+
+    border-top: 1px solid #e2e8f0;
+}
+
+.datos div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.datos span {
+    color: #94a3b8;
+
+    font-size: 10px;
+    font-weight: bold;
+
+    letter-spacing: 1px;
+}
+
+.datos strong {
+    color: #2563eb;
+
+    font-size: 18px;
+}
+
+
+/* CATEGORÍA */
+
+.categoria {
+    display: inline-block;
+
+    margin-top: 20px;
+    padding: 6px 11px;
+
+    background: #eff6ff;
+    color: #1d4ed8;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+    font-weight: bold;
+
+    text-transform: uppercase;
+}
+
+
+/* SIN PRODUCTOS */
+
+.sin-productos {
+    max-width: 500px;
+
+    margin: 70px auto;
+    padding: 45px 30px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+}
+
+.icono-vacio {
+    width: 45px;
+    height: 45px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eff6ff;
+    color: #2563eb;
+
+    font-weight: bold;
+}
+
+.sin-productos h2 {
+    margin-bottom: 10px;
+}
+
+.sin-productos p {
+    color: #64748b;
+    line-height: 1.6;
+
+    margin-bottom: 25px;
+}
+
+.sin-productos a {
+    display: inline-block;
+
+    padding: 11px 20px;
+
+    background: #2563eb;
+    color: #ffffff;
+
+    text-decoration: none;
+    font-weight: bold;
+
+    border-radius: 7px;
+}
+
+
+/* TABLET */
+
+@media (max-width: 900px) {
+
+    .productos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* CELULAR */
+
+@media (max-width: 600px) {
+
+    .navbar {
+        padding: 0 20px;
+    }
+
+    .catalogo {
+        padding: 50px 20px;
+    }
+
+    .productos {
+        grid-template-columns: 1fr;
+    }
+
+    .producto {
+        min-height: auto;
+    }
+
+    .producto-numero {
+        margin-bottom: 35px;
+    }
+
+    .encabezado h1 {
+        font-size: 44px;
+    }
+}

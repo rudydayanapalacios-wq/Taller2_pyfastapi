@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TechGear | Inicio</title>
+
+    <link rel="stylesheet" href="{% static 'catalogo/css/inicio.css' %}">
+</head>
+
+<body>
+
+    <main class="inicio">
+
+        <section class="bienvenida">
+
+            <span class="etiqueta">TECHGEAR</span>
+
+            <h1>
+                Tecnología que<br>
+                <span>impulsa tu mundo.</span>
+            </h1>
+
+            <p>
+                Descubre nuestro catálogo de productos tecnológicos
+                y encuentra lo que necesitas para tu día a día.
+            </p>
+
+            <a href="{% url 'productos' %}" class="boton">
+                Explorar productos
+                <span>→</span>
+            </a>
+
+        
+
+    </main>
+
+</body>
+</html>
