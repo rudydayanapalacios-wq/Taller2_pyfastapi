@@ -13,30 +13,187 @@
 
 <body>
 
-    <main class="inicio">
+    <!-- NAVBAR -->
+    <header class="navbar">
 
-        <section class="bienvenida">
+        <a href="{% url 'inicio' %}" class="logo">
+            <span>TECH</span>GEAR
+        </a>
 
-            <span class="etiqueta">TECHGEAR</span>
+        <nav>
+            <a href="{% url 'inicio' %}" class="activo">Inicio</a>
+            <a href="{% url 'productos' %}">Productos</a>
+        </nav>
 
-            <h1>
-                Tecnología que<br>
-                <span>impulsa tu mundo.</span>
-            </h1>
+    </header>
 
-            <p>
-                Descubre nuestro catálogo de productos tecnológicos
-                y encuentra lo que necesitas para tu día a día.
-            </p>
 
-            <a href="{% url 'productos' %}" class="boton">
-                Explorar productos
+    <!-- HERO -->
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-contenido">
+
+                <span class="etiqueta">TECHGEAR / TECNOLOGÍA</span>
+
+                <h1>
+                    Tecnología que
+                    <span>impulsa tu mundo.</span>
+                </h1>
+
+                <p>
+                    Descubre productos tecnológicos pensados para mejorar
+                    tu experiencia, productividad y entretenimiento.
+                </p>
+
+                <a href="{% url 'productos' %}" class="boton">
+                    Explorar productos
+                    <span>→</span>
+                </a>
+
+            </div>
+
+            <div class="hero-visual">
+
+                <div class="circulo circulo-grande"></div>
+                <div class="circulo circulo-mediano"></div>
+
+                <div class="tarjeta-tech">
+                    <span>TECHGEAR</span>
+                    <strong>01</strong>
+                    <p>Innovation<br>starts here.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PRESENTACIÓN -->
+        <section class="presentacion">
+
+            <div class="seccion-titulo">
+
+                <span class="etiqueta">01 / NOSOTROS</span>
+
+                <h2>
+                    Tecnología para
+                    <span>cada momento.</span>
+                </h2>
+
+            </div>
+
+            <div class="presentacion-texto">
+
+                <p>
+                    En TechGear reunimos productos tecnológicos y accesorios
+                    diseñados para acompañarte en tu día a día.
+                </p>
+
+                <p>
+                    Nuestro catálogo combina funcionalidad, innovación y
+                    tecnología para que encuentres diferentes opciones
+                    desde un solo lugar.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- CARACTERÍSTICAS -->
+        <section class="caracteristicas">
+
+            <article class="caracteristica">
+
+                <span class="numero">01</span>
+
+                <h3>Calidad</h3>
+
+                <p>
+                    Productos seleccionados para ofrecer una experiencia
+                    tecnológica confiable.
+                </p>
+
+            </article>
+
+
+            <article class="caracteristica">
+
+                <span class="numero">02</span>
+
+                <h3>Innovación</h3>
+
+                <p>
+                    Tecnología pensada para acompañar las necesidades
+                    del mundo actual.
+                </p>
+
+            </article>
+
+
+            <article class="caracteristica">
+
+                <span class="numero">03</span>
+
+                <h3>Variedad</h3>
+
+                <p>
+                    Diferentes productos y accesorios reunidos en nuestro
+                    catálogo.
+                </p>
+
+            </article>
+
+        </section>
+
+
+        <!-- CATÁLOGO -->
+        <section class="catalogo-destacado">
+
+            <div>
+
+                <span class="etiqueta">02 / CATÁLOGO</span>
+
+                <h2>
+                    Explora nuestros
+                    <span>productos.</span>
+                </h2>
+
+                <p>
+                    Consulta los productos disponibles y descubre las
+                    opciones que TechGear tiene para ti.
+                </p>
+
+            </div>
+
+            <a href="{% url 'productos' %}" class="boton boton-secundario">
+                Ver catálogo
                 <span>→</span>
             </a>
 
-        
+        </section>
 
     </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="footer-logo">
+            <span>TECH</span>GEAR
+        </div>
+
+        <p>
+            Tecnología que impulsa tu mundo.
+        </p>
+
+        <span class="copyright">
+            © 2026 TechGear
+        </span>
+
+    </footer>
 
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,31 +14,50 @@
 
 <body>
 
+    <!-- NAVBAR -->
     <header class="navbar">
 
         <a href="{% url 'inicio' %}" class="logo">
             <span>TECH</span>GEAR
         </a>
 
-        <a href="{% url 'inicio' %}" class="inicio-link">
-            Inicio
-        </a>
+        <nav>
+            <a href="{% url 'inicio' %}">
+                Inicio
+            </a>
+
+            <a href="{% url 'productos' %}" class="activo">
+                Productos
+            </a>
+        </nav>
 
     </header>
 
 
+    <!-- CATÁLOGO -->
     <main class="catalogo">
 
+        <!-- ENCABEZADO -->
         <section class="encabezado">
-            <span class="etiqueta">TECHGEAR / CATÁLOGO</span>
 
-            <h1>Productos</h1>
+            <span class="etiqueta">
+                TECHGEAR / CATÁLOGO
+            </span>
+
+            <h1>
+                Nuestros
+                <span>productos.</span>
+            </h1>
 
             <p>
-                Explora los productos disponibles en nuestro catálogo.
+                Explora nuestro catálogo de productos tecnológicos
+                disponibles y encuentra la solución ideal para ti.
             </p>
+
         </section>
 
+
+        <!-- PRODUCTOS -->
 
         {% if productos %}
 
@@ -47,35 +67,72 @@
 
                     <article class="producto">
 
-                        <div class="producto-numero">
-                            PRODUCTO {{ forloop.counter|stringformat:"02d" }}
+                        <!-- IMAGEN -->
+
+                        <div class="producto-imagen">
+
+                            <div class="imagen-placeholder">
+                                <span>TECHGEAR</span>
+                            </div>
+
                         </div>
+
+
+                        <!-- CONTENIDO -->
 
                         <div class="producto-contenido">
 
-                            <h2>{{ producto.nombre }}</h2>
+                            <div class="producto-superior">
+
+                                <span class="producto-numero">
+                                    PRODUCTO {{ forloop.counter|stringformat:"02d" }}
+                                </span>
+
+                                <span class="categoria">
+                                    {{ producto.categoria }}
+                                </span>
+
+                            </div>
+
+
+                            <h2>
+                                {{ producto.nombre }}
+                            </h2>
+
 
                             <p class="descripcion">
                                 {{ producto.descripcion }}
                             </p>
 
+
                             <div class="datos">
 
-                                <div>
-                                    <span>PRECIO</span>
-                                    <strong>${{ producto.precio }}</strong>
+                                <div class="dato">
+
+                                    <span>
+                                        PRECIO
+                                    </span>
+
+                                    <strong>
+                                        ${{ producto.precio }}
+                                    </strong>
+
                                 </div>
 
-                                <div>
-                                    <span>STOCK</span>
-                                    <strong>{{ producto.stock }}</strong>
+
+                                <div class="dato">
+
+                                    <span>
+                                        STOCK
+                                    </span>
+
+                                    <strong>
+                                        {{ producto.stock }}
+                                    </strong>
+
                                 </div>
 
                             </div>
-
-                            <span class="categoria">
-                                {{ producto.categoria }}
-                            </span>
 
                         </div>
 
@@ -85,13 +142,20 @@
 
             </section>
 
+
         {% else %}
+
+            <!-- SIN PRODUCTOS -->
 
             <section class="sin-productos">
 
-                <div class="icono-vacio">!</div>
+                <div class="icono-vacio">
+                    !
+                </div>
 
-                <h2>No hay productos disponibles</h2>
+                <h2>
+                    No hay productos disponibles
+                </h2>
 
                 <p>
                     No encontramos productos disponibles
@@ -108,5 +172,21 @@
 
     </main>
 
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div class="footer-logo">
+            <span>TECH</span>GEAR
+        </div>
+
+        <div class="copyright">
+            © 2026 TechGear · Tecnología para todos
+        </div>
+
+    </footer>
+
 </body>
+
 </html>

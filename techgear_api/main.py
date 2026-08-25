@@ -1,10 +1,19 @@
 from fastapi import FastAPI
+
 from techgear_api.routers.productos import router as productos_router
 from techgear_api.routers.pedidos import router as pedidos_router
 
 app = FastAPI(
     title="TechGear API"
 )
+
+
+@app.get("/")
+def inicio():
+    return {
+        "mensaje": "Bienvenido a la API de TechGear",
+        "documentacion": "Escribe /docs para ver la documentación de la API"
+    }   
 
 
 app.include_router(productos_router)
