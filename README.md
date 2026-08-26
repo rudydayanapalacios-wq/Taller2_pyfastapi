@@ -207,8 +207,65 @@ FastAPI
    ▼
 Django → Muestra Catálogo al Usuario
 ```
+---
+
+## 🌐 Integración Django y FastAPI
+
+El portal web de TechGear está desarrollado con Django y se comunica con la API REST de FastAPI mediante peticiones HTTP utilizando la librería `requests`.
+
+Django se encarga de:
+
+- Renderizar la interfaz web mediante Templates.
+- Mostrar dinámicamente los productos obtenidos desde FastAPI.
+- Gestionar las rutas y vistas del portal.
+- Enviar solicitudes para consultar, crear, editar y eliminar productos.
+- Enviar los datos de los pedidos hacia FastAPI.
+
+FastAPI se encarga de:
+
+- Procesar las solicitudes recibidas desde Django.
+- Validar los datos mediante Pydantic.
+- Gestionar los productos y pedidos.
+- Comunicarse con MongoDB Atlas para almacenar y consultar la información.
+
+La comunicación entre ambas aplicaciones se realiza mediante endpoints REST y respuestas en formato JSON.
+
+### 📂 Componentes principales de Django
+
+```text
+techgear_web/
+└── catalogo/
+    ├── templates/
+    │   └── catalogo/
+    │       ├── inicio.html
+    │       ├── productos.html
+    │       ├── crear_producto.html
+    │       ├── editar_producto.html
+    │       └── checkout.html
+    │
+    ├── static/
+    │   └── catalogo/
+    │       └── css/
+    │           ├── inicio.css
+    │           ├── productos.css
+    │           └── productos-form.css
+    │
+    ├── urls.py
+    └── views.py
+```
+
+
+| Operación           | Método HTTP | Endpoint          |
+| ------------------- | ----------- | ----------------- |
+| Consultar productos | GET         | `/productos/`     |
+| Crear producto      | POST        | `/productos/`     |
+| Consultar producto  | GET         | `/productos/{id}` |
+| Editar producto     | PUT         | `/productos/{id}` |
+| Eliminar producto   | DELETE      | `/productos/{id}` |
+| Crear pedido        | POST        | `/pedidos/`       |
 
 ---
+
 
 ## 🛡️ Validaciones y Respuestas HTTP
 

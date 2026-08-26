@@ -1,0 +1,254 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Editar Producto - TechGear</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'catalogo/css/productos-form.css' %}"
+    >
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <a
+        href="{% url 'productos' %}"
+        class="logo"
+    >
+        <span>TECH</span>GEAR
+    </a>
+
+    <nav>
+
+        <a href="{% url 'productos' %}">
+            Productos
+        </a>
+
+        <a
+            href="{% url 'crear_producto' %}"
+        >
+            Crear producto
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main class="catalogo">
+
+    <section class="encabezado">
+
+        <span class="etiqueta">
+            GESTIÓN DE PRODUCTOS
+        </span>
+
+        <h1>
+            Editar <span>Producto.</span>
+        </h1>
+
+        <p>
+            Modifica la información del producto.
+        </p>
+
+    </section>
+
+
+    <section class="formulario-producto">
+
+        {% if error %}
+
+            <p>
+                {{ error }}
+            </p>
+
+        {% endif %}
+
+
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+            {% csrf_token %}
+
+
+            <div class="campo">
+
+                <label for="nombre">
+                    Nombre del producto
+                </label>
+
+                <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    value="{{ producto.nombre|default:'' }}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="descripcion">
+                    Descripción
+                </label>
+
+                <textarea
+                    id="descripcion"
+                    name="descripcion"
+                    required
+                >{{ producto.descripcion|default:'' }}</textarea>
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="precio">
+                    Precio
+                </label>
+
+                <input
+                    type="number"
+                    id="precio"
+                    name="precio"
+                    step="0.01"
+                    min="0"
+                    value="{{ producto.precio|default:'' }}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="stock">
+                    Stock
+                </label>
+
+                <input
+                    type="number"
+                    id="stock"
+                    name="stock"
+                    min="0"
+                    value="{{ producto.stock|default:'' }}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="categoria">
+                    Categoría
+                </label>
+
+                <input
+                    type="text"
+                    id="categoria"
+                    name="categoria"
+                    value="{{ producto.categoria|default:'' }}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="imagen">
+                    Imagen del producto
+                </label>
+
+                {% if producto.imagen %}
+
+                    <div class="imagen-actual">
+
+                        <p>
+                            Imagen actual:
+                        </p>
+
+                        <img
+                            src="http://127.0.0.1:8001/imagenes/{{ producto.imagen }}"
+                            alt="{{ producto.nombre }}"
+                        >
+
+                    </div>
+
+                {% endif %}
+
+
+                <input
+                    type="file"
+                    id="imagen"
+                    name="imagen"
+                    accept="image/*"
+                >
+
+                <small>
+                    Selecciona una nueva imagen solamente si deseas cambiarla.
+                </small>
+
+            </div>
+
+
+            <div class="acciones-formulario">
+
+                <button
+                    type="submit"
+                    class="btn-agregar"
+                >
+                    Guardar cambios
+                </button>
+
+
+                <a
+                    href="{% url 'productos' %}"
+                    class="btn-editar"
+                >
+                    Cancelar
+                </a>
+
+            </div>
+
+        </form>
+
+    </section>
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="footer-logo">
+        <span>TECH</span>GEAR
+    </div>
+
+    <div class="copyright">
+        © 2026 TechGear · Tecnología para todos
+    </div>
+
+</footer>
+
+</body>
+
+</html>

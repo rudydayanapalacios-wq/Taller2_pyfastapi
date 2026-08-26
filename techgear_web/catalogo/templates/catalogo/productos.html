@@ -2,191 +2,242 @@
 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>TechGear | Productos</title>
 
-    <link rel="stylesheet" href="{% static 'catalogo/css/productos.css' %}">
+    <link
+        rel="stylesheet"
+        href="{% static 'catalogo/css/productos.css' %}"
+    >
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
-    <header class="navbar">
+<header class="navbar">
 
-        <a href="{% url 'inicio' %}" class="logo">
-            <span>TECH</span>GEAR
+    <a href="{% url 'inicio' %}" class="logo">
+        <span>TECH</span>GEAR
+    </a>
+
+    <nav>
+        <a href="{% url 'inicio' %}">
+            Inicio
         </a>
 
-        <nav>
-            <a href="{% url 'inicio' %}">
-                Inicio
-            </a>
+        <a
+            href="{% url 'productos' %}"
+            class="activo"
+        >
+            Productos
+        </a>
+    </nav>
 
-            <a href="{% url 'productos' %}" class="activo">
-                Productos
-            </a>
-        </nav>
-
-    </header>
+</header>
 
 
-    <!-- CATÁLOGO -->
-    <main class="catalogo">
+<main class="catalogo">
 
-        <!-- ENCABEZADO -->
-        <section class="encabezado">
+    <section class="encabezado">
 
-            <span class="etiqueta">
-                TECHGEAR / CATÁLOGO
-            </span>
+        <span class="etiqueta">
+            TECHGEAR / CATÁLOGO
+        </span>
 
-            <h1>
-                Nuestros
-                <span>productos.</span>
-            </h1>
+        <h1>
+            Nuestros
+            <span>productos.</span>
+        </h1>
 
-            <p>
-                Explora nuestro catálogo de productos tecnológicos
-                disponibles y encuentra la solución ideal para ti.
-            </p>
+        <p>
+            Explora nuestro catálogo de productos
+            tecnológicos disponibles.
+        </p>
 
-        </section>
+        <a
+            href="{% url 'crear_producto' %}"
+            class="btn-agregar"
+        >
+            + Agregar producto
+        </a>
 
-
-        <!-- PRODUCTOS -->
-
-        {% if productos %}
-
-            <section class="productos">
-
-                {% for producto in productos %}
-
-                    <article class="producto">
-
-                        <!-- IMAGEN -->
-
-                        <div class="producto-imagen">
-
-                            <div class="imagen-placeholder">
-                                <span>TECHGEAR</span>
-                            </div>
-
-                        </div>
+    </section>
 
 
-                        <!-- CONTENIDO -->
+    {% if productos %}
 
-                        <div class="producto-contenido">
+    <section class="productos">
 
-                            <div class="producto-superior">
+        {% for producto in productos %}
 
-                                <span class="producto-numero">
-                                    PRODUCTO {{ forloop.counter|stringformat:"02d" }}
-                                </span>
+        <article class="producto">
 
-                                <span class="categoria">
-                                    {{ producto.categoria }}
-                                </span>
+            <div class="producto-imagen">
 
-                            </div>
+                {% if producto.imagen %}
 
+                    <img
+                        src="http://127.0.0.1:8001/imagenes/{{ producto.imagen }}"
+                        alt="{{ producto.nombre }}"
+                    >
 
-                            <h2>
-                                {{ producto.nombre }}
-                            </h2>
+                {% else %}
 
+                    <span>TECHGEAR</span>
 
-                            <p class="descripcion">
-                                {{ producto.descripcion }}
-                            </p>
+                {% endif %}
 
-
-                            <div class="datos">
-
-                                <div class="dato">
-
-                                    <span>
-                                        PRECIO
-                                    </span>
-
-                                    <strong>
-                                        ${{ producto.precio }}
-                                    </strong>
-
-                                </div>
+            </div>
 
 
-                                <div class="dato">
+            <div class="producto-contenido">
 
-                                    <span>
-                                        STOCK
-                                    </span>
+                <div class="producto-superior">
 
-                                    <strong>
-                                        {{ producto.stock }}
-                                    </strong>
+                    <span class="producto-numero">
+                        PRODUCTO
+                        {{ forloop.counter|stringformat:"02d" }}
+                    </span>
 
-                                </div>
+                    <span class="categoria">
+                        {{ producto.categoria }}
+                    </span>
 
-                            </div>
-
-                        </div>
-
-                    </article>
-
-                {% endfor %}
-
-            </section>
-
-
-        {% else %}
-
-            <!-- SIN PRODUCTOS -->
-
-            <section class="sin-productos">
-
-                <div class="icono-vacio">
-                    !
                 </div>
 
+
                 <h2>
-                    No hay productos disponibles
+                    {{ producto.nombre }}
                 </h2>
 
-                <p>
-                    No encontramos productos disponibles
-                    en este momento.
+
+                <p class="descripcion">
+                    {{ producto.descripcion }}
                 </p>
 
-                <a href="{% url 'inicio' %}">
-                    Volver al inicio
-                </a>
 
-            </section>
+                <div class="datos">
 
-        {% endif %}
+                    <div class="dato">
 
-    </main>
+                        <span>
+                            PRECIO
+                        </span>
+
+                        <strong>
+                            ${{ producto.precio }}
+                        </strong>
+
+                    </div>
 
 
-    <!-- FOOTER -->
+                    <div class="dato">
 
-    <footer class="footer">
+                        <span>
+                            STOCK
+                        </span>
 
-        <div class="footer-logo">
-            <span>TECH</span>GEAR
-        </div>
+                        <strong>
+                            {{ producto.stock }}
+                        </strong>
 
-        <div class="copyright">
-            © 2026 TechGear · Tecnología para todos
-        </div>
+                    </div>
 
-    </footer>
+                </div>
+
+
+                {% if producto.stock > 0 %}
+
+                    <a
+                        href="{% url 'checkout' %}?producto_id={{ producto.id }}"
+                        class="btn-comprar"
+                    >
+                        Comprar producto
+                    </a>
+
+                {% else %}
+
+                    <span class="agotado">
+                        Producto agotado
+                    </span>
+
+                {% endif %}
+
+
+                <div class="acciones-producto">
+
+                    <a
+                        href="{% url 'editar_producto' producto.id %}"
+                        class="btn-editar"
+                    >
+                        Editar
+                    </a>
+
+
+                    <form
+                        method="POST"
+                        action="{% url 'eliminar_producto' producto.id %}"
+                        onsubmit="return confirm('¿Eliminar este producto?');"
+                    >
+
+                        {% csrf_token %}
+
+                        <button
+                            type="submit"
+                            class="btn-eliminar"
+                        >
+                            Eliminar
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </article>
+
+        {% endfor %}
+
+    </section>
+
+
+    {% else %}
+
+    <section class="sin-productos">
+
+        <h2>
+            No hay productos disponibles
+        </h2>
+
+        <p>
+            Todavía no existen productos registrados.
+        </p>
+
+        <a href="{% url 'crear_producto' %}">
+            Agregar producto
+        </a>
+
+    </section>
+
+    {% endif %}
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="footer-logo">
+        <span>TECH</span>GEAR
+    </div>
+
+    <div class="copyright">
+        © 2026 TechGear · Tecnología para todos
+    </div>
+
+</footer>
 
 </body>
-
 </html>

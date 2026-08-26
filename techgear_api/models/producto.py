@@ -7,6 +7,8 @@ class Producto(BaseModel):
     precio: float
     stock: int
     categoria: str
+    imagen: str = ""
+
 
 class ProductoRespuesta(Producto):
     id: str

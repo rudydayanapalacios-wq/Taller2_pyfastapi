@@ -1,0 +1,386 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TechGear | Checkout</title>
+
+    <link rel="stylesheet" href="{% static 'catalogo/css/checkout.css' %}">
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <a href="{% url 'inicio' %}" class="logo">
+            <span>TECH</span>GEAR
+        </a>
+
+        <nav>
+
+            <a href="{% url 'inicio' %}">
+                Inicio
+            </a>
+
+            <a href="{% url 'productos' %}">
+                Productos
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- CHECKOUT -->
+
+    <main class="checkout">
+
+        <section class="encabezado">
+
+            <span class="etiqueta">
+                TECHGEAR / CHECKOUT
+            </span>
+
+            <h1>
+                Finaliza tu
+                <span>pedido.</span>
+            </h1>
+
+            <p>
+                Completa los datos para realizar tu pedido.
+            </p>
+
+        </section>
+
+
+        <!-- FORMULARIO -->
+
+        <section class="formulario-contenedor">
+
+            <div class="formulario-titulo">
+
+                <span>
+                    DATOS DEL PEDIDO
+                </span>
+
+                <h2>
+                    Crear pedido
+                </h2>
+
+            </div>
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <!-- PRODUCTO -->
+
+                <div class="campo">
+
+                    <label for="producto_id">
+                        Producto
+                    </label>
+
+                    <select
+                        name="producto_id"
+                        id="producto_id"
+                        required
+                    >
+
+                        <option value="">
+                            Selecciona un producto
+                        </option>
+
+                        {% for producto in productos %}
+
+                            <option
+                                value="{{ producto.id }}"
+                                data-precio="{{ producto.precio }}"
+                                data-stock="{{ producto.stock }}"
+                                {% if producto.stock == 0 %}
+                                    disabled
+                                {% endif %}
+                                {% if producto_seleccionado == producto.id %}
+                                    selected
+                                {% endif %}
+                            >
+                                {{ producto.nombre }}
+                                {% if producto.stock == 0 %}
+                                    - SIN STOCK
+                                {% else %}
+                                    - Stock: {{ producto.stock }}
+                                {% endif %}
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- PRECIO -->
+
+                <div class="campo">
+
+                    <label for="precio">
+                        Precio unitario
+                    </label>
+
+                    <input
+                        type="number"
+                        id="precio"
+                        step="0.01"
+                        readonly
+                        placeholder="Selecciona un producto"
+                    >
+
+                </div>
+
+
+                <!-- CLIENTE -->
+
+                <div class="campo">
+
+                    <label for="cliente">
+                        Cliente
+                    </label>
+
+                    <input
+                        type="text"
+                        name="cliente"
+                        id="cliente"
+                        placeholder="Escribe tu nombre"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CANTIDAD -->
+
+                <div class="campo">
+
+                    <label for="cantidad">
+                        Cantidad
+                    </label>
+
+                    <input
+                        type="number"
+                        name="cantidad"
+                        id="cantidad"
+                        min="1"
+                        value="1"
+                        required
+                        disabled
+                    >
+
+                    <small id="mensaje-stock">
+                        Selecciona un producto para conocer el stock disponible.
+                    </small>
+
+                </div>
+
+
+                <!-- TOTAL -->
+
+                <div class="campo">
+
+                    <label for="total">
+                        Total
+                    </label>
+
+                    <input
+                        type="number"
+                        name="total"
+                        id="total"
+                        step="0.01"
+                        min="0"
+                        readonly
+                        placeholder="El total se calculará automáticamente"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- BOTÓN -->
+
+                <button
+                    type="submit"
+                    id="btn-pedido"
+                    disabled
+                >
+                    REALIZAR PEDIDO
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div class="footer-logo">
+            <span>TECH</span>GEAR
+        </div>
+
+        <div class="copyright">
+            © 2026 TechGear · Tecnología para todos
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        const productoSelect = document.getElementById("producto_id");
+        const precioInput = document.getElementById("precio");
+        const cantidadInput = document.getElementById("cantidad");
+        const totalInput = document.getElementById("total");
+        const mensajeStock = document.getElementById("mensaje-stock");
+        const botonPedido = document.getElementById("btn-pedido");
+
+
+        function actualizarPedido() {
+
+            const opcion = productoSelect.options[productoSelect.selectedIndex];
+
+            if (!opcion || !opcion.value) {
+
+                precioInput.value = "";
+                cantidadInput.value = 1;
+                cantidadInput.disabled = true;
+                cantidadInput.removeAttribute("max");
+                totalInput.value = "";
+                botonPedido.disabled = true;
+
+                mensajeStock.textContent =
+                    "Selecciona un producto para conocer el stock disponible.";
+
+                return;
+            }
+
+
+            const precio = parseFloat(opcion.dataset.precio);
+            const stock = parseInt(opcion.dataset.stock);
+
+
+            if (stock <= 0) {
+
+                precioInput.value = precio.toFixed(2);
+
+                cantidadInput.value = 0;
+                cantidadInput.disabled = true;
+                cantidadInput.max = 0;
+
+                totalInput.value = "0.00";
+
+                botonPedido.disabled = true;
+
+                mensajeStock.textContent =
+                    "Este producto no tiene unidades disponibles.";
+
+                return;
+            }
+
+
+            precioInput.value = precio.toFixed(2);
+
+            cantidadInput.disabled = false;
+            cantidadInput.min = 1;
+            cantidadInput.max = stock;
+
+
+            if (
+                cantidadInput.value < 1 ||
+                parseInt(cantidadInput.value) > stock
+            ) {
+                cantidadInput.value = 1;
+            }
+
+
+            mensajeStock.textContent =
+                "Stock disponible: " + stock + " unidades.";
+
+
+            calcularTotal();
+
+            botonPedido.disabled = false;
+        }
+
+
+        function calcularTotal() {
+
+            const opcion = productoSelect.options[productoSelect.selectedIndex];
+
+            if (!opcion || !opcion.value) {
+                totalInput.value = "";
+                return;
+            }
+
+
+            const precio = parseFloat(opcion.dataset.precio);
+            const stock = parseInt(opcion.dataset.stock);
+
+            let cantidad = parseInt(cantidadInput.value);
+
+
+            if (isNaN(cantidad) || cantidad < 1) {
+                cantidad = 1;
+                cantidadInput.value = 1;
+            }
+
+
+            if (cantidad > stock) {
+                cantidad = stock;
+                cantidadInput.value = stock;
+            }
+
+
+            const total = precio * cantidad;
+
+            totalInput.value = total.toFixed(2);
+        }
+
+
+        productoSelect.addEventListener(
+            "change",
+            actualizarPedido
+        );
+
+
+        cantidadInput.addEventListener(
+            "input",
+            calcularTotal
+        );
+
+
+        productoSelect.addEventListener(
+            "change",
+            calcularTotal
+        );
+
+
+        actualizarPedido();
+
+    </script>
+
+</body>
+
+</html>
