@@ -10,6 +10,7 @@ def inicio(request):
     return render(request, "catalogo/inicio.html")
 
 
+
 def productos(request):
     url = f"{API_URL}/productos/"
 
