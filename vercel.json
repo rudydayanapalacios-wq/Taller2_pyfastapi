@@ -3,6 +3,10 @@
     {
       "src": "techgear_web/techgear/wsgi.py",
       "use": "@vercel/python"
+    },
+    {
+      "src": "techgear_web/staticfiles/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
