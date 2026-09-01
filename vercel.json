@@ -7,6 +7,10 @@
   ],
   "routes": [
     {
+      "src": "/static/(.*)",
+      "dest": "/techgear_web/catalogo/static/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "techgear_web/techgear/wsgi.py"
     }
