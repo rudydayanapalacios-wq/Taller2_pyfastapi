@@ -8,7 +8,7 @@
   "routes": [
     {
       "src": "/static/(.*)",
-      "dest": "/techgear_web/catalogo/static/$1"
+      "dest": "/techgear_web/staticfiles/$1"
     },
     {
       "src": "/(.*)",
@@ -16,3 +16,4 @@
     }
   ]
 }
+
