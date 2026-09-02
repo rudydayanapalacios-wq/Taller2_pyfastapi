@@ -1,9 +1,10 @@
+import os
 import requests
 
 from django.shortcuts import render, redirect
 
 
-API_URL = "http://127.0.0.1:8001"
+API_URL = os.environ.get("API_URL", "http://127.0.0.1:8001")
 
 
 def inicio(request):
