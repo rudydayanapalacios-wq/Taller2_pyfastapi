@@ -1,0 +1,108 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechGear | Pedidos</title>
+    <link rel="stylesheet" href="{% static 'catalogo/css/inicio.css' %}">
+    <link rel="stylesheet" href="{% static 'catalogo/css/pedidos.css' %}">
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <a href="{% url 'inicio' %}" class="logo">
+        <span>TECH</span>GEAR
+    </a>
+
+    <nav>
+        <a href="{% url 'inicio' %}">Inicio</a>
+        <a href="{% url 'productos' %}">Productos</a>
+        <a href="{% url 'pedidos' %}" class="activo">Pedidos</a>
+    </nav>
+
+</header>
+
+
+<main class="catalogo">
+
+    <section class="encabezado">
+
+        <span class="etiqueta">TECHGEAR / PEDIDOS</span>
+
+        <h1>Historial de <span>pedidos.</span></h1>
+
+        <p>Consulta todos los pedidos realizados en TechGear.</p>
+
+    </section>
+
+
+    {% if pedidos %}
+
+    <section class="pedidos-grid">
+
+        {% for pedido in pedidos %}
+
+        <article class="pedido-card">
+
+            <div class="pedido-encabezado">
+
+                <span class="pedido-numero">
+                    PEDIDO {{ forloop.counter|stringformat:"02d" }}
+                </span>
+
+                <span class="pedido-cantidad-badge">
+                    x{{ pedido.cantidad }}
+                </span>
+
+            </div>
+
+            <h2 class="pedido-cliente">{{ pedido.cliente }}</h2>
+
+            <p class="pedido-producto">
+                Producto: {{ pedido.producto_id }}
+            </p>
+
+            <div class="pedido-datos">
+
+                <div class="pedido-dato">
+                    <span>CANTIDAD</span>
+                    <strong>{{ pedido.cantidad }}</strong>
+                </div>
+
+                <div class="pedido-dato">
+                    <span>TOTAL</span>
+                    <strong>${{ pedido.total }}</strong>
+                </div>
+
+            </div>
+
+        </article>
+
+        {% endfor %}
+
+    </section>
+
+    {% else %}
+
+    <section class="sin-pedidos">
+        <h2>No hay pedidos registrados</h2>
+        <p>Todavía no se ha realizado ningún pedido.</p>
+    </section>
+
+    {% endif %}
+
+</main>
+
+
+<footer class="footer">
+    <div class="footer-logo"><span>TECH</span>GEAR</div>
+    <div class="copyright">© 2026 TechGear · Tecnología para todos</div>
+</footer>
+
+</body>
+</html>

@@ -33,4 +33,10 @@ urlpatterns = [
         views.checkout,
         name="checkout"
     ),
+
+        path(
+        "pedidos/",
+        views.pedidos,
+        name="pedidos"
+    ),
 ]

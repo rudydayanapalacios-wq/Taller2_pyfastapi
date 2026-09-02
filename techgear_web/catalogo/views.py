@@ -309,3 +309,28 @@ def checkout(request):
             "producto_seleccionado": producto_seleccionado
         }
     )
+
+
+def pedidos(request):
+
+    url = f"{API_URL}/pedidos/"
+
+    try:
+
+        respuesta = requests.get(url)
+        respuesta.raise_for_status()
+        pedidos = respuesta.json()
+
+    except requests.RequestException as error:
+
+        pedidos = []
+
+        print(f"Error al conectar con FastAPI: {error}")
+
+    return render(
+        request,
+        "catalogo/pedidos.html",
+        {
+            "pedidos": pedidos
+        }
+    )
